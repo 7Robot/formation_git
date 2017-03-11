@@ -13,3 +13,7 @@ for k in range len(L):
 	if L[k]==5:
 		print("arrête d'être con et mange tes pieds")
 		L[k]=123456789
+
+
+
+SHISFHMSEHNGMOSRHGMSNGMNÃ™LWSNFGSDMKJGN		
