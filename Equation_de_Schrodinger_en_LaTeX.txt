@@ -1,0 +1,1 @@
+i\hbar\frac{\partial | \Psi(\vec{r},t)\rangle}{\partial t}=\frac{\vec{P}}{2m}|\Psi(\vec{r},t)\rangle+V(\vec{r},t)|\Psi(\vec{r},t)\rangle
