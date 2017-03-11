@@ -8,13 +8,13 @@ git branch Nom_branche_locale --> crée la branche locale Nom_branche_locale
 git branch -d Nom_branche_locale --> supprime la branche locale Nom_branche_locale
 
 git checkout Nom_branche_locale --> bascule sur la branche locale Nom_branche_locale
-git checkout -b Fin_commande --> Equivaut à la commande "git branch Fin_commande", et bascule sur la branche en question
+git checkout -b Nom_branche_locale --> Crée la branche locale Nom_branche_locale et bascule dessus directement
 
 git merge Nom_branche_locale --> importe les modifications de la branche locale Nom_branche_locale sur la branche actuelle
 
-git status --> montre les fichiers modifés
+git status --> montre les fichiers modifiés et/ou non suivis
 git add . --> ajoute toutes les modifications locales au commit
-git commit -m "Message" --> crée le commit local avec les fichiers modifiés avec comme descritpion "Message"
+git commit -m "Message" --> crée le commit local avec les fichiers modifiés avec comme description "Message"
 
 git stash --> enregistre les modifications, mais ne les applique pas (remisage)
 git stash list --> liste les remisages
@@ -41,4 +41,4 @@ git push --> envoie les modifications locales sur la branche distante
 git push --set-upstream origin Nom_branche_distante --> configure la branche distante Nom_branche_distante pour suivre la branche locale actuelle
 git push origin :Nom_branche --> supprime la branche distante
 
-git rm --cached nom_fichier --> supprime l'index du fichier nom_fichier
+git rm --cached Nom_fichier --> supprime l'index du fichier Nom_fichier
