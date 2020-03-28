@@ -17,9 +17,9 @@ class Game:
 
         while self.ally.is_alive() and self.enemy.is_alive():
             action = self.io.get_action()
-            if action == 'A':
+            if action == IO.Action.ATTAQUER:
                 r = self.ally.attack(self.enemy)
-            elif action == 'S':
+            elif action == IO.Action.SOIGNER:
                 r = self.ally.heal()
             else:
                 sys.exit(-1)
@@ -72,10 +72,16 @@ class IO:
         print('\tAttaquer: A')
         print('\tSe soigner: S')
         choix = ''
-        while not choix in ['A', 'a', 'S', 's']:
-            choix = input()
+        while not choix in ['A', 'S']:
+            choix = input().upper()
+            if choix == 'A':
+                action = IO.Action.ATTAQUER
+            elif choix == 'S':
+                action = IO.Action.SOIGNER
+            else:
+                pass
 
-        return choix.upper()
+        return action
     
     def victory(self, winner):
         print(f'{winner.name} gagne après {self.step} tours')
