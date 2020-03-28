@@ -43,6 +43,7 @@ class IO:
     Modifier la sélection de la seed
     Modifier la gestion des actions (plus robuste)
     ...
+    Commentaire Matthieu
     '''
     class Action(enum.IntEnum):
         ATTAQUER = 0
