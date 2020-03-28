@@ -1,5 +1,6 @@
 import sys
 import random
+import enum
 
 class Game:
     '''
@@ -43,6 +44,9 @@ class IO:
     Modifier la gestion des actions (plus robuste)
     ...
     '''
+    class Action(enum.IntEnum):
+        ATTAQUER = 0
+        SOIGNER = 1
 
     def __init__(self):
         print('Bienvenue dans le RPG git formation')
