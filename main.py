@@ -48,8 +48,8 @@ class IO:
 
     def __init__(self):
         print('Bienvenue dans le RPG git formation')
-        self.name = input('Choisi ton nom:\n')
-        self.seed = input('Choisi un nombre:\n')
+        self.name = input('Choisis ton nom:\n')
+        self.seed = input('Choisis un nombre:\n')
         self.step = 0
 
     def start(self, ally, enemy):
@@ -65,16 +65,18 @@ class IO:
         elif action[0] == 'S':
             print(f'\t{attacker.name} se soigne de {action[1]}')
         elif action[0] == 'AM':
-            print(f'\t{attacker.name} attaque.\n'
-                  f'\t{defenser.name} subit {action[1]} dégat'
+            print(f'\t{attacker.name} lance un sort.'
+                  f'\t{attacker.name} a encore {attacker.mana} points de mana.\n'
+                  f'\t{defenser.name} brule et subit {action[1]} dégat.'
                   f'\tIl reste {defenser.health} à {defenser.name}')
 
     def get_action(self):
-        print('Choisi ton action:')
+        print('Choisis ton action:')
         print('\tAttaquer: A')
+        print('\tAttaque Magique: AM')
         print('\tSe soigner: S')
         choix = ''
-        while not choix in ['A', 'a', 'S', 's', 'AM']:
+        while not choix in ['A', 'a', 'S', 's', 'AM', 'am', 'Am', 'aM']:
             choix = input()
 
         return choix.upper()
