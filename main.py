@@ -8,8 +8,8 @@ class Game:
     def __init__(self):
         self.io = IO()
         self.rng = random.Random(self.io.seed)
-        self.ally = Personnage(self.io.name, 50, self.rng.randrange(1, 10))
-        self.enemy = Personnage('GitBoss', 50, self.rng.randrange(1, 10))
+        self.ally = Personnage(self.io.name, 50, self.rng.randrange(1, 10), self.rng.randrange(20, 25))
+        self.enemy = Personnage('GitBoss', 50, self.rng.randrange(1, 10), self.rng.randrange(20, 25))
 
     def run(self):
         self.io.start(self.ally, self.enemy)
@@ -20,6 +20,8 @@ class Game:
                 r = self.ally.attack(self.enemy)
             elif action == 'S':
                 r = self.ally.heal()
+            elif action == 'AM':
+                r = self.ally.attack_magik(self.enemy, 5)
             else:
                 sys.exit(-1)
 
@@ -62,17 +64,21 @@ class IO:
                   f'\tIl reste {defenser.health} à {defenser.name}')
         elif action[0] == 'S':
             print(f'\t{attacker.name} se soigne de {action[1]}')
+        elif action[0] == 'AM':
+            print(f'\t{attacker.name} attaque.\n'
+                  f'\t{defenser.name} subit {action[1]} dégat'
+                  f'\tIl reste {defenser.health} à {defenser.name}')
 
     def get_action(self):
         print('Choisi ton action:')
         print('\tAttaquer: A')
         print('\tSe soigner: S')
         choix = ''
-        while not choix in ['A', 'a', 'S', 's']:
+        while not choix in ['A', 'a', 'S', 's', 'AM']:
             choix = input()
 
         return choix.upper()
-    
+
     def victory(self, winner):
         print(f'{winner.name} gagne après {self.step} tours')
 
@@ -85,11 +91,12 @@ class Personnage:
     Attaque magique et physique
     Ajouter de l'aléa dans les dégats
     '''
-    def __init__(self, name, health, damage):
+    def __init__(self, name, health, damage, mana):
         self.name = name
         self.health = health
         self.damage = damage
-    
+        self.mana = mana
+
     def attack(self, other):
         other.take_damage(self.damage)
         return self.damage
@@ -103,6 +110,15 @@ class Personnage:
 
     def is_alive(self):
         return self.health > 0
+
+    def attack_magik(self, other, cout):
+        if self.mana >= cout:
+            self.mana -= cout
+            other.take_damage(self.damage + cout)
+            return self.damage + cout
+        else:
+            return 0
+
 
 
 def main():
