@@ -1,6 +1,8 @@
 import sys
 import random
 
+# this code has been made for 7robot
+
 class Game:
     '''
     Class principale pour la gestion du jeu
