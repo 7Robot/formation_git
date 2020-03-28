@@ -1,5 +1,6 @@
 import sys
 import random
+import enum
 
 # this code has been made for 7robot
 
@@ -18,11 +19,11 @@ class Game:
 
         while self.ally.is_alive() and self.enemy.is_alive():
             action = self.io.get_action()
-            if action == 'A':
+            if action == IO.Action.ATTAQUER:
                 r = self.ally.attack(self.enemy)
-            elif action == 'S':
+            elif action == IO.Action.SOIGNER:
                 r = self.ally.heal()
-            elif action == 'AM':
+            elif action == IO.Action.ATTAQUE_MAGIQUE:
                 r = self.ally.attack_magik(self.enemy, 5)
             else:
                 sys.exit(-1)
@@ -46,7 +47,12 @@ class IO:
     Modifier la sélection de la seed
     Modifier la gestion des actions (plus robuste)
     ...
+    Commentaire Matthieu
     '''
+    class Action(enum.IntEnum):
+        ATTAQUER = 0
+        SOIGNER = 1
+        ATTAQUE_MAGIQUE = 2
 
     def __init__(self):
         print('Bienvenue dans le RPG git formation')
@@ -60,13 +66,13 @@ class IO:
     def print_action(self, attacker, defenser, action):
         self.step += 1
         print(f'=== Tour {self.step} ===')
-        if action[0] == 'A':
+        if action[0] == IO.Action.ATTAQUER:
             print(f'\t{attacker.name} attaque.\n'
                   f'\t{defenser.name} subit {action[1]} dégat'
                   f'\tIl reste {defenser.health} à {defenser.name}')
-        elif action[0] == 'S':
+        elif action[0] == IO.Action.SOIGNER:
             print(f'\t{attacker.name} se soigne de {action[1]}')
-        elif action[0] == 'AM':
+        elif action[0] == IO.Action.ATTAQUE_MAGIQUE:
             print(f'\t{attacker.name} lance un sort.'
                   f'\t{attacker.name} a encore {attacker.mana} points de mana.\n'
                   f'\t{defenser.name} brule et subit {action[1]} dégat.'
@@ -78,10 +84,18 @@ class IO:
         print('\tAttaque Magique: AM')
         print('\tSe soigner: S')
         choix = ''
-        while not choix in ['A', 'a', 'S', 's', 'AM', 'am', 'Am', 'aM']:
-            choix = input()
+        while not choix in ['A', 'S']:
+            choix = input().upper()
+            if choix == 'A':
+                action = IO.Action.ATTAQUER
+            elif choix == 'S':
+                action = IO.Action.SOIGNER
+            elif choix == 'AM':
+                action = IO.Action.ATTAQUE_MAGIQUE
+            else:
+                pass
 
-        return choix.upper()
+        return action
 
     def victory(self, winner):
         print(f'{winner.name} gagne après {self.step} tours')
