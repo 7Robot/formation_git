@@ -84,7 +84,7 @@ class IO:
         print('\tAttaque Magique: AM')
         print('\tSe soigner: S')
         choix = ''
-        while not choix in ['A', 'S']:
+        while not choix in ['A', 'S','AM']:
             choix = input().upper()
             if choix == 'A':
                 action = IO.Action.ATTAQUER
