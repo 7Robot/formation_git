@@ -60,11 +60,11 @@ class IO:
     def print_action(self, attacker, defenser, action):
         self.step += 1
         print(f'=== Tour {self.step} ===')
-        if action[0] == 'A':
+        if action[0] == IO.Action.ATTAQUER:
             print(f'\t{attacker.name} attaque.\n'
                   f'\t{defenser.name} subit {action[1]} dégat'
                   f'\tIl reste {defenser.health} à {defenser.name}')
-        elif action[0] == 'S':
+        elif action[0] == IO.Action.SOIGNER:
             print(f'\t{attacker.name} se soigne de {action[1]}')
 
     def get_action(self):
